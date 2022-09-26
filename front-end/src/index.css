@@ -1,0 +1,22 @@
+*{
+    margin: 0;padding: 0;box-sizing: border-box;
+    text-decoration: none!important;
+    font-family: 'Times New Roman', Times, serif;
+}
+.ul{
+    display: flex; 
+    list-style-type: none;
+    
+}
+
+.ul li,
+.myul li{
+    border: 1px solid rgb(91, 178, 228) ;
+    width: 130px;
+    padding: 0 10px;
+    font-weight: bold;
+    list-style-type: none;
+}
+.myul{
+    display: flex;
+}
