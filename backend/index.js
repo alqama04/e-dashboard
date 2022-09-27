@@ -44,7 +44,7 @@ app.get('/products',async(_,resp)=>{
 })
 
 
-app.delete('/delete/:id',async(req,resp)=>{
+app.delete('/product/:id',async(req,resp)=>{
   let result =await Product.deleteOne({_id:req.params.id})
   if(result.deletedCount>0){
     resp.send(result)
@@ -53,5 +53,37 @@ app.delete('/delete/:id',async(req,resp)=>{
   }
 })
 
+app.get("/product/:id",async(req,resp)=>{
+  console.log(req.param);
+  let result =await Product.findById({_id:req.params.id})
+  console.log(result)
+  if(result){
+    resp.send(result)
+  }else{
+    resp.send({result:"No Record Found"})
+  }
 
+  
+})
+
+app.put("/product/:id",async(req,resp)=>{
+  let result = await Product.updateOne(
+    {_id:req.params.id},
+    {$set:req.body}
+  )
+  resp.send(result)
+})
+// search 
+app.get("/search/:key",async(req,resp)=>{
+  let result =await Product.find({
+    "$or":[
+      {name:{$regex:req.params.key}},
+      {company:{$regex:req.params.key}},
+      {category:{$regex:req.params.key}},
+    ]
+  })
+  console.log(result);
+  resp.send(result)
+})
 app.listen(300);
+
