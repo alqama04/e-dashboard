@@ -8,7 +8,11 @@ const Products = () => {
     getProducts();
   }, []);
   const getProducts = async () => {
-    let result = await fetch("http://localhost:300/products");
+    let result = await fetch("http://localhost:300/products",{
+      headers:{
+        authorization:`bearer ${JSON.parse(localStorage.getItem('token'))}`
+      }
+    });
     result = await result.json();
     setProduct(result);
   };
@@ -30,7 +34,11 @@ const Products = () => {
     console.log(key)
     if(key!==''){
 
-      let result = await  fetch(`http://localhost:300/search/${key}`)
+      let result = await  fetch(`http://localhost:300/search/${key}`,{
+        headers:{
+          authorization:`bearer ${JSON.parse(localStorage.getItem('token'))}`
+        }
+      })
       result = await result.json()
       if(result){
         setProduct(result)
